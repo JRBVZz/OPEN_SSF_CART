@@ -1,0 +1,62 @@
+
+# === CART CONTROL ===
+
+NET "cas0"	LOC = "P10"; # /OE
+NET "ceo"	LOC = "P12"; # /CE
+NET "vres"	LOC = "P27"; # /RST
+NET "lwr"	LOC = "P30"; # /WR
+NET "tme"	LOC = "P33"; # /TIME
+
+# === CART ADDRESS ===
+
+NET "cart_address<1>"  LOC = "P11";
+NET "cart_address<2>"  LOC = "P7";
+NET "cart_address<3>"  LOC = "P5";
+NET "cart_address<4>"  LOC = "P3";
+NET "cart_address<5>"  LOC = "P140";
+NET "cart_address<6>"  LOC = "P136";
+NET "cart_address<7>"  LOC = "P132";
+NET "cart_address<8>"  LOC = "P128";
+
+NET "cart_address<9>"  LOC = "P129";
+NET "cart_address<10>"  LOC = "P131";
+NET "cart_address<11>"  LOC = "P130";
+NET "cart_address<12>"  LOC = "P134";
+NET "cart_address<13>"  LOC = "P138";
+NET "cart_address<14>"  LOC = "P143";
+NET "cart_address<15>"  LOC = "P4";
+NET "cart_address<16>"  LOC = "P6";
+
+NET "cart_address<17>"  LOC = "P9";
+NET "cart_address<18>"  LOC = "P133";
+NET "cart_address<19>"  LOC = "P135";
+NET "cart_address<20>"  LOC = "P137";
+NET "cart_address<21>"  LOC = "P139";
+NET "cart_address<22>"  LOC = "P142";
+NET "cart_address<23>"  LOC = "P2";
+
+# === CART DATA ===
+
+NET "cart_data<0>"  LOC = "P14";
+NET "cart_data<1>"  LOC = "P19";
+NET "cart_data<2>"  LOC = "P25";
+NET "cart_data<3>"  LOC = "P31";
+NET "cart_data<4>"  LOC = "P28";
+NET "cart_data<5>"  LOC = "P23";
+NET "cart_data<6>"  LOC = "P16";
+NET "cart_data<7>"  LOC = "P13";
+
+NET "cart_data<8>"   LOC = "P15";
+NET "cart_data<9>"   LOC = "P21";
+NET "cart_data<10>"  LOC = "P26";
+NET "cart_data<11>"  LOC = "P32";
+NET "cart_data<12>"  LOC = "P24";
+NET "cart_data<13>"  LOC = "P22";
+NET "cart_data<14>"  LOC = "P20";
+NET "cart_data<15>"  LOC = "P17";
+
+# === ROM CONTROL ===
+
+# === ROM ADDRESS ===
+
+# === ROM DATA ===

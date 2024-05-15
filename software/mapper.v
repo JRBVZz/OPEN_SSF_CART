@@ -45,7 +45,11 @@ module mapper(
 	 output [0:25] rom_address,
 	 inout [0:15] rom_data,
 	 output [0:4] rom_ce,
-	 output rom_oe
+	 output rom_oe,
+	 
+	 output sram_oe,
+	 output sram_ce,
+	 output sram_we
 	 
     );
 
