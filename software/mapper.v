@@ -22,21 +22,12 @@ module mapper(
     input [1:23] cart_address,
     inout [0:15] cart_data,
 	 
-	 input ys, 			// VDP is currently drawing the backdrop colour.
-	 input edclk, 		// External Dot Clock (~13.4 or 10.7 MHz).
-	 input cas0, 		// Read or Write on $000000-$DFFFFF region.
-	 input ceo, 		/*	Chip Enable for the cartridge.
+	input cas0, 		// Read or Write on $000000-$DFFFFF region.
+	input ceo, 		/*	Chip Enable for the cartridge.
 								Normally low when accessing $000000-$3FFFFF region.
 								When expension unit is present then low when accessing $400000-$7FFFFF.
 							*/
-	 input as, 			// Address strobe, address on bus is currently valid and not changing.
-	 input vclk, 		// 68K Clock
-	 output dtack, 	// Data acknowledge to 68K.
-	 input cas2, 		// Read or Write on $E00000-$FFFFFF region, maybe (Upper 2MB).
-	 input asel, 		// Read or Write on $000000-$7FFFFF region
-	 input vres, 		// System reset, from front panel switch.
 	 input lwr, 		// Lower byte WRite, the lower byte on the data lines should be written to the location in the address lines.
-	 input uwr, 		// Upper byte WRite, the upper byte on the data lines should be written to the location in the address lines.
 	 
 	 input tme, 		/* Set for r/w at/to $A13000-$A130FF, given the name suggests it might be for a real time clock in the cartridge.
 								This would enable usage as a chip enable on a RTC, using fewer address lines or logic to that RTC. Used in Sonic 3 for SRAM.

@@ -57,6 +57,64 @@ NET "cart_data<15>"  LOC = "P17";
 
 # === ROM CONTROL ===
 
+NET "rom_oe<0>"  LOC = "P40";
+NET "rom_oe<1>"  LOC = "P91";
+#NET "rom_oe<2>"  LOC = "P93";
+#NET "rom_oe<3>"  LOC = "P95";
+
+NET "rom_ce<0>"  LOC = "P39";
+NET "rom_ce<1>"  LOC = "P88";
+#NET "rom_ce<2>"  LOC = "P92";
+#NET "rom_ce<3>"  LOC = "P94";
+
+NET "sram_oe"  LOC = "P97";
+NET "sram_ce"  LOC = "P96";
+NET "sram_we"  LOC = "P98";
+
+
 # === ROM ADDRESS ===
 
+NET "rom_address<0>"  LOC = "P38";
+NET "rom_address<1>"  LOC = "P87";
+NET "rom_address<2>"  LOC = "P86";
+NET "rom_address<3>"  LOC = "P85";
+NET "rom_address<4>"  LOC = "P83";
+NET "rom_address<5>"  LOC = "P82";
+NET "rom_address<6>"  LOC = "P81";
+NET "rom_address<7>"  LOC = "P80";
+
+NET "rom_address<8>"  LOC = "P74";
+NET "rom_address<9>"  LOC = "P71";
+NET "rom_address<10>"  LOC = "P70";
+NET "rom_address<11>"  LOC = "P69";
+NET "rom_address<12>"  LOC = "P52";
+NET "rom_address<13>"  LOC = "P54";
+NET "rom_address<14>"  LOC = "P57";
+NET "rom_address<15>"  LOC = "P61";
+
+NET "rom_address<16>"  LOC = "P60";
+NET "rom_address<17>"  LOC = "P79";
+NET "rom_address<18>"  LOC = "P78";
+NET "rom_address<19>"  LOC = "P75";
+NET "rom_address<20>"  LOC = "P76";
+NET "rom_address<21>"  LOC = "P77";
+
 # === ROM DATA ===
+
+NET "rom_data<0>"  LOC = "P41";
+NET "rom_data<1>"  LOC = "P44";
+NET "rom_data<2>"  LOC = "P46";
+NET "rom_data<3>"  LOC = "P49";
+NET "rom_data<4>"  LOC = "P51";
+NET "rom_data<5>"  LOC = "P53";
+NET "rom_data<6>"  LOC = "P56";
+NET "rom_data<7>"  LOC = "P58";
+
+NET "rom_data<8>"  LOC = "P43";
+NET "rom_data<9>"  LOC = "P45";
+NET "rom_data<10>"  LOC = "P48";
+NET "rom_data<11>"  LOC = "P50";
+NET "rom_data<12>"  LOC = "P52";
+NET "rom_data<13>"  LOC = "P54";
+NET "rom_data<14>"  LOC = "P57";
+NET "rom_data<15>"  LOC = "P59";
