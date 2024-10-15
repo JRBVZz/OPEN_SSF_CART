@@ -1,9 +1,13 @@
 
+# === DEBUG ===
+
+NET "debug_write"	LOC = "P101";
+
 # === CART CONTROL ===
 
 NET "cas0"	LOC = "P10"; # /OE
-NET "ceo"	LOC = "P12"; # /CE
-NET "vres"	LOC = "P27"; # /RST
+NET "ce_0"	LOC = "P12"; # /CE
+#NET "vres"	LOC = "P27"; # /RST
 NET "lwr"	LOC = "P30"; # /WR
 NET "tme"	LOC = "P33"; # /TIME
 
@@ -87,9 +91,9 @@ NET "rom_address<8>"  LOC = "P74";
 NET "rom_address<9>"  LOC = "P71";
 NET "rom_address<10>"  LOC = "P70";
 NET "rom_address<11>"  LOC = "P69";
-NET "rom_address<12>"  LOC = "P52";
-NET "rom_address<13>"  LOC = "P54";
-NET "rom_address<14>"  LOC = "P57";
+NET "rom_address<12>"  LOC = "P68";
+NET "rom_address<13>"  LOC = "P66";
+NET "rom_address<14>"  LOC = "P64";
 NET "rom_address<15>"  LOC = "P61";
 
 NET "rom_address<16>"  LOC = "P60";
