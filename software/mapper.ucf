@@ -1,13 +1,13 @@
 
 # === DEBUG ===
 
-#NET "debug_write"	LOC = "P101";
+NET "debug_out"	LOC = "P101";
 
 # === CART CONTROL ===
 
 NET "cas0"	LOC = "P10"; # /OE
 NET "ce_0"	LOC = "P12"; # /CE
-#NET "vres"	LOC = "P27"; # /RST
+NET "vres"	LOC = "P27"; # /RST
 NET "lwr"	LOC = "P30"; # /WR
 NET "tme"	LOC = "P33"; # /TIME
 

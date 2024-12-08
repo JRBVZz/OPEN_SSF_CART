@@ -7,12 +7,12 @@ module mapper(
     inout [15:0] cart_data,
 	 
     input cas0, 		
-	 // Read or Write on $000000-$DFFFFF region.
+	 // Read(0) or Write(1) on $000000-$DFFFFF region.
 	 
 	 input ce_0, 		
-	 //Chip Enable for the cartridge.
-	 //Normally low when accessing $000000-$3FFFFF region.
-	 //When expension unit is present then low when accessing $400000-$7FFFFF.
+	 // Chip Enable for the cartridge.
+	 // Normally low when accessing $000000-$3FFFFF region.
+	 // When expension unit is present then low when accessing $400000-$7FFFFF.
 	 
 	 input lwr,
 	 // Lower byte WRite, the lower byte on the data lines should be written to 
@@ -25,7 +25,7 @@ module mapper(
 	 // lines or logic to that RTC. Used in Sonic 3 for SRAM.
 	
 	 
-	 // input vres, 		
+	 input vres, 		
 	 // System reset, from front panel switch.
 	 
 	 output [21:0] rom_address,
@@ -35,19 +35,27 @@ module mapper(
 	 
 	 output sram_oe,
 	 output sram_ce,
-	 output sram_we
+	 output sram_we,
+	 
+	 output debug_out
 );
 
 reg sram_enabled;
 reg sram_writable;
 reg [5:0] banks[7:1];
 
+wire is_read;
+
+wire sram_active;
 wire [1:0] rom_ctrl;
 wire [2:0] bank_idx;
 wire [5:0] current_bank;
 
 initial 
 begin
+
+	sram_enabled = 1'b0;
+	sram_writable = 1'b0;
 
 	//banks[0] = 6'b010000; // $000000 - $07FFFF
 	banks[1] = 6'b000001; // $080000 - $0FFFFF
@@ -60,27 +68,35 @@ begin
 
 end
 
-assign bank_idx = cart_address[21:19];
-assign is_zero_bank = bank_idx == 3'b000;
-assign current_bank = banks[bank_idx];
+assign is_read = ~cas0;
 
-assign rom_ctrl[1:0] = ~ce_0
-	? is_zero_bank
-	? 2'b10
-		: current_bank[5:4] == 2'b00 ? 2'b10 : 2'b01
+assign sram_active = sram_enabled & cart_address[21];
+assign sram_rw = sram_active & is_read ? 1'b0 : 1'b1;
+
+assign bank_idx = cart_address[21:19];
+assign current_bank = banks[bank_idx];
+assign is_zero_bank = bank_idx == 3'b000;
+
+assign rom_ctrl[1:0] = ~ce_0 ?
+	is_zero_bank ? 2'b10
+		: sram_active ? 2'b11 
+			: current_bank[5:4] == 2'b00 ? 2'b10 : 2'b01
 	: 2'b11;
+	
 assign rom_oe[1:0] = rom_ctrl[1:0];
 assign rom_ce[1:0] = rom_ctrl[1:0];
 	
 assign rom_address[17:0] = cart_address[18:1];
 assign rom_address[21:18] = is_zero_bank ? 4'b0000 : current_bank[3:0];
 
-assign cart_data = ~ce_0 & ~cas0 ? rom_data : 16'hz;
-assign rom_data = ~ce_0 & ~cas0 ? 16'hz : cart_data;
+assign cart_data = ~ce_0 & is_read ? rom_data : 16'hz;
+assign rom_data = ~ce_0 & is_read ? 16'hz : cart_data;
 
-assign sram_we = 1'b1;
-assign sram_oe = 1'b1;
-assign sram_ce = 1'b1;
+assign sram_we = ~sram_writable;
+assign sram_oe = sram_rw;
+assign sram_ce = ~sram_active;
+
+assign debug_out = sram_rw;
 
 always @(negedge lwr)
 begin
