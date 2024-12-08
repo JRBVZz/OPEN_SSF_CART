@@ -45,6 +45,7 @@ reg sram_writable;
 reg [5:0] banks[7:1];
 
 wire is_read;
+wire cart_enabled;
 
 wire sram_active;
 wire [1:0] rom_ctrl;
@@ -69,15 +70,22 @@ begin
 end
 
 assign is_read = ~cas0;
+assign cart_enabled = ~ce_0;
 
 assign sram_active = sram_enabled & cart_address[21];
-assign sram_rw = sram_active & is_read ? 1'b0 : 1'b1;
+assign sram_rw = sram_active & cart_enabled ? 1'b0 : 1'b1;
+
+assign sram_we = lwr;
+assign sram_ce = sram_rw;
+assign sram_oe = cas0;
+
+assign debug_out = sram_rw;
 
 assign bank_idx = cart_address[21:19];
 assign current_bank = banks[bank_idx];
 assign is_zero_bank = bank_idx == 3'b000;
 
-assign rom_ctrl[1:0] = ~ce_0 ?
+assign rom_ctrl[1:0] = cart_enabled ?
 	is_zero_bank ? 2'b10
 		: sram_active ? 2'b11 
 			: current_bank[5:4] == 2'b00 ? 2'b10 : 2'b01
@@ -89,14 +97,8 @@ assign rom_ce[1:0] = rom_ctrl[1:0];
 assign rom_address[17:0] = cart_address[18:1];
 assign rom_address[21:18] = is_zero_bank ? 4'b0000 : current_bank[3:0];
 
-assign cart_data = ~ce_0 & is_read ? rom_data : 16'hz;
-assign rom_data = ~ce_0 & is_read ? 16'hz : cart_data;
-
-assign sram_we = ~sram_writable;
-assign sram_oe = sram_rw;
-assign sram_ce = ~sram_active;
-
-assign debug_out = sram_rw;
+assign cart_data = cart_enabled & is_read ? rom_data : 16'hz;
+assign rom_data = cart_enabled & is_read ? 16'hz : cart_data;
 
 always @(negedge lwr)
 begin
