@@ -1,7 +1,7 @@
 
 # === DEBUG ===
 
-NET "debug_out"	LOC = "P101";
+#NET "debug_out"	LOC = "P101";
 
 # === CART CONTROL ===
 

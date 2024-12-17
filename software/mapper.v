@@ -35,9 +35,7 @@ module mapper(
 	 
 	 output sram_oe,
 	 output sram_ce,
-	 output sram_we,
-	 
-	 output debug_out
+	 output sram_we
 );
 
 reg sram_enabled;
@@ -78,8 +76,6 @@ assign sram_rw = sram_active & cart_enabled ? 1'b0 : 1'b1;
 assign sram_we = lwr;
 assign sram_ce = sram_rw;
 assign sram_oe = cas0;
-
-assign debug_out = sram_rw;
 
 assign bank_idx = cart_address[21:19];
 assign current_bank = banks[bank_idx];
